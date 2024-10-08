@@ -9,8 +9,8 @@ const Generate = ({ searchParams }: { searchParams: { id: string, url: string, b
   const [hello, setHello] = useState(searchParams.box)
   const [meme,setImage] = useState<string | null>(null)
  
-  let input1 = useRef<HTMLInputElement>(null);
-  let input2 = useRef<HTMLInputElement>(null);
+  const input2 = useRef<HTMLInputElement| null>(null);
+  const input1 = useRef<HTMLInputElement| null>(null);
 
   const postMeme = async (event: any ) =>{
    event.preventDefault();
@@ -18,6 +18,8 @@ const Generate = ({ searchParams }: { searchParams: { id: string, url: string, b
   const respone = await data.json()
    console.log(respone);
    setImage(respone.data.url)
+   input1.current.value=''
+   input2.current.value=''
  }
 
   useEffect(() => {
