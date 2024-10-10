@@ -27,15 +27,50 @@ const Generate = ({ searchParams }: { searchParams: { id: string, url: string, b
     }
   };
 
+  // download meme ===>>
+
+  const downloadMeme = async () => {
+    if (meme) {
+      try {
+        const response = await fetch(meme, {
+          mode: 'no-cors',
+        });
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'generated-meme.jpg'); // File name
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url); // Clean up URL
+        window.location.reload()
+
+      } catch (error) {
+        console.error('Error downloading the meme:', error);
+      }
+    }
+  };
+
+    // edit meme ===>>
+    
+    const Editmeme = () => {
+    window.location.reload()
+    }
+    
+
+
   useEffect(() => {
     setHello(searchParams.box);
   }, [searchParams.box]);  // Add 'searchParams.box' to dependency
 
   return (
     <>
-      <div className='flex justify-center '>
+    <div className='flex  justify-center gap-5 mt-8 flex-wrap'>
+      <div className='items-center mt-7'>
+      <div className='flex justify-center'>
         <Image src={searchParams.url} width={300} height={300} alt='no-image ' className='border border-black rounded' />
-      </div>
+      </div> 
       {
         hello == 2 ? (
           <div className='flex justify-center gap-5 mt-5 flex-wrap '>
@@ -43,13 +78,13 @@ const Generate = ({ searchParams }: { searchParams: { id: string, url: string, b
               <input
                 type="text"
                 placeholder="Type here"
-                className="input input-bordered bg-blue-100 text-black w-full max-w-xs rounded-md p-2 border-2 border-black"
+                className="input input-bordered bg-blue-100 text-black w-full max-w-xs rounded-md p-2 border border-black"
                 ref={input1} 
               /> <br /><br />
               <input
                 type="text"
                 placeholder="Type here"
-                className="input input-bordered bg-blue-100 text-black w-full max-w-xs rounded-md p-2 border-2 border-black"
+                className="input input-bordered bg-blue-100 text-black w-full max-w-xs rounded-md p-2 border border-black"
                 ref={input2} 
               /> <br /><br />
               <div className='flex justify-center'>
@@ -61,8 +96,18 @@ const Generate = ({ searchParams }: { searchParams: { id: string, url: string, b
           <div>Loading...</div>
         )
       }
+      </div>
+      <div className='items-center m-4'>
       <div className='flex justify-center mt-3 '>
-        {meme ? <Image src={meme} width={300} height={300} alt="loading" className='border rounded border-black' /> : null}
+        {meme ? <div><Image src={meme} width={300} height={300} alt="loading" className='border rounded border-black' /> 
+        <div className='gap-9'>
+        <button onClick={downloadMeme} className= ' bg-yellow-500 text-white mt-5 text-sm px-4 py-2 rounded' type='submit'>Download Meme</button>
+       <button onClick={Editmeme} className= ' bg-green-500 ml-5 text-white mt-5 text-sm px-4 py-2 rounded' type='submit'>Edit Meme</button>
+   </div>
+        </div> 
+         : null }
+      </div>
+      </div>
       </div>
     </>
   );

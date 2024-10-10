@@ -9,13 +9,8 @@ const page = async () => {
 
   return (
     <>
-    <div className='flex justify-center gap-2 mt-4'>
-      <div className='animate-bounce bg-white'>
-      <Image className="object-contain  bg-white" key={1} src={'http://w7.pngwing.com/pngs/761/310/png-transparent-internet-troll-internet-meme-trollface-laughing-face-meme-sticker-miscellaneous-face-food-thumbnail.png'} width={60} height={60}  alt='no-img'/>
-     </div>
-      <div>
-        <h1 className='text-center mt-5 text-3xl font-bold '>Meme Generator App </h1> 
-      </div>
+    <div className='flex justify-center  gap-2 mt-4'>
+     <h1 className='text-center mt-5 text-3xl font-bold animate-bounce '>  <span className="text-3xl">😀</span> Meme Generator App </h1> 
       </div>
     <div className='bg-red-400 text-white align-center justify-center mt-3 flex animate-pulse'>
 If you Want To Generate Memes !
