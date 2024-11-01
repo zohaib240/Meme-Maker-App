@@ -32,25 +32,22 @@ const Generate = ({ searchParams }: { searchParams: { id: string, url: string, b
   const downloadMeme = async () => {
     if (meme) {
       try {
-        const response = await fetch(meme, {
-          mode: 'no-cors',
-        });
+        const response = await fetch(meme);
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'generated-meme.jpg'); // File name
+        link.setAttribute('download', 'generated-meme.jpg'); // File ka naam
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        window.URL.revokeObjectURL(url); // Clean up URL
-        window.location.reload()
-
+        window.URL.revokeObjectURL(url);
       } catch (error) {
         console.error('Error downloading the meme:', error);
       }
     }
   };
+  
 
     // edit meme ===>>
     
@@ -77,7 +74,7 @@ const Generate = ({ searchParams }: { searchParams: { id: string, url: string, b
             <form onSubmit={postMeme}>
               <input
                 type="text"
-                placeholder="Type here"
+                placeholder='Type here'
                 className="input input-bordered bg-blue-100 text-black w-full max-w-xs rounded-md p-2 border border-black"
                 ref={input1} 
               /> <br /><br />
